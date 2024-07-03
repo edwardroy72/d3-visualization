@@ -24,11 +24,13 @@
         .text("Hey, I added this element using d3!!");
 
       // Creating an SVG
+      var width = 1000;
+      var height = 1000;
       var canvas = d3 // SVG Constructor
         .select("body")
         .append("svg")
-        .attr("width", 1000)
-        .attr("height", 1000);
+        .attr("width", width)
+        .attr("height", height);
 
       var circle = canvas // Using SVG constructor to create shapes
         .append("circle")
@@ -54,15 +56,20 @@
 
       // Data Visualization Example
       // BarChart
-      var dataArray = [70, 20, 40, 3, 50, 20];
-      var bars = canvas
+
+      var dataArray = [70, 20, 40, 3, 50, 20, 150];
+      var widthScale = d3.scale // Linear scale to make all data points fit in graph
+        .linear()
+        .domain([0, Math.max(...dataArray)]) // Min and Max data points in array
+        .range([0, width]); // Min and Max widths possible (basically 0 and max width of svg)
+      var barChart = canvas
         .selectAll()
         .data(dataArray)
         .enter()
         .append("rect")
         .attr("fill", "green")
         .attr("width", function (d) {
-          return d * 10;
+          return widthScale(d);
         })
         .attr("height", 50)
         .attr("y", function (d, i) {
