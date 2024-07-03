@@ -10,12 +10,47 @@
   <body
     style="background-color: #262626; color: #d4d4d4; font-family: Helvetica"
   >
-    <p>This is a pragraph</p>
+    <h1>This is a pragraph</h1>
     <script>
-      d3.select("p").text("Hello World!");
+      // Modifying existing element on page
+      d3.select("h1")
+        .text("Hello World!")
+        .style("text-align", "center")
+        .style("color", "#B98DCA");
+
+      // Appending new element on page
       d3.select("body")
         .append("p")
         .text("Hey, I added this element using d3!!");
+
+      // Creating an SVG
+      var canvas = d3
+        .select("body")
+        .append("svg")
+        .attr("width", 500)
+        .attr("height", 500);
+
+      var circle = canvas
+        .append("circle")
+        .attr("cx", 250)
+        .attr("cy", 250)
+        .attr("r", 50)
+        .attr("fill", "red");
+
+      var rect = canvas
+        .append("rect")
+        .attr("width", 100)
+        .attr("height", 50)
+        .attr("fill", "blue");
+
+      var line = canvas
+        .append("line")
+        .attr("x1", 0)
+        .attr("y1", 100)
+        .attr("x2", 400)
+        .attr("y2", 400)
+        .attr("stroke", "green")
+        .attr("stroke-width", 10);
     </script>
   </body>
 </html>
