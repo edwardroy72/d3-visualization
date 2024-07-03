@@ -24,13 +24,12 @@
         .text("Hey, I added this element using d3!!");
 
       // Creating an SVG
-      var width = 1000;
-      var height = 1000;
       var canvas = d3 // SVG Constructor
         .select("body")
         .append("svg")
-        .attr("width", width)
-        .attr("height", height);
+        .attr("width", 500) // set html attributes of element
+        .attr("height", 500)
+        .append("g"); // groups elements created together
 
       var circle = canvas // Using SVG constructor to create shapes
         .append("circle")
@@ -56,25 +55,44 @@
 
       // Data Visualization Example
       // BarChart
-
       var dataArray = [70, 20, 40, 3, 50, 20, 150];
+      var width = 1000;
+      var height = 1000;
       var widthScale = d3.scale // Linear scale to make all data points fit in graph
         .linear()
         .domain([0, Math.max(...dataArray)]) // Min and Max data points in array
         .range([0, width]); // Min and Max widths possible (basically 0 and max width of svg)
-      var barChart = canvas
-        .selectAll()
+      var colorScale = d3.scale
+        .linear()
+        .domain([0, 150])
+        .range(["#004515", "#009e2f"]);
+
+      var barChartCanvas = d3 // SVG Constructor
+        .select("body")
+        .append("svg")
+        .attr("width", width) // set html attributes of element
+        .attr("height", height)
+        .append("g"); // groups elements created together
+      var barChart = barChartCanvas
+        .selectAll() // selects all elements of type arg e.g. selectAll("rect") selects all rectangles
         .data(dataArray)
-        .enter()
+        .enter() // enter() essentially acts as a for loop iterating through data set
         .append("rect")
-        .attr("fill", "green")
+        .attr("fill", function (d) {
+          // each element from enter() provides a data (here d) and index argument
+          return colorScale(d);
+        })
         .attr("width", function (d) {
           return widthScale(d);
         })
         .attr("height", 50)
         .attr("y", function (d, i) {
           return i * 55 + 500;
-        });
+        })
+        .attr("transform", "translate(50, 0)"); // transform(x right, y down)
+
+      var axis = d3.svg.axis().ticks(10).scale(widthScale);
+      barChartCanvas.append("g").call(axis);
     </script>
   </body>
 </html>
