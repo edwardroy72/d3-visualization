@@ -24,13 +24,13 @@
         .text("Hey, I added this element using d3!!");
 
       // Creating an SVG
-      var canvas = d3
+      var canvas = d3 // SVG Constructor
         .select("body")
         .append("svg")
-        .attr("width", 500)
-        .attr("height", 500);
+        .attr("width", 1000)
+        .attr("height", 1000);
 
-      var circle = canvas
+      var circle = canvas // Using SVG constructor to create shapes
         .append("circle")
         .attr("cx", 250)
         .attr("cy", 250)
@@ -45,12 +45,29 @@
 
       var line = canvas
         .append("line")
-        .attr("x1", 0)
+        .attr("x1", 10)
         .attr("y1", 100)
         .attr("x2", 400)
         .attr("y2", 400)
         .attr("stroke", "green")
         .attr("stroke-width", 10);
+
+      // Data Visualization Example
+      // BarChart
+      var dataArray = [70, 20, 40, 3, 50, 20];
+      var bars = canvas
+        .selectAll()
+        .data(dataArray)
+        .enter()
+        .append("rect")
+        .attr("fill", "green")
+        .attr("width", function (d) {
+          return d * 10;
+        })
+        .attr("height", 50)
+        .attr("y", function (d, i) {
+          return i * 55 + 500;
+        });
     </script>
   </body>
 </html>
