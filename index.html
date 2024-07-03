@@ -7,10 +7,15 @@
     <script src="https://d3js.org/d3.v3.min.js"></script>
   </head>
 
-  <body>
+  <body
+    style="background-color: #262626; color: #d4d4d4; font-family: Helvetica"
+  >
     <p>This is a pragraph</p>
     <script>
       d3.select("p").text("Hello World!");
+      d3.select("body")
+        .append("p")
+        .text("Hey, I added this element using d3!!");
     </script>
   </body>
 </html>
