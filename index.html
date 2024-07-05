@@ -10,22 +10,15 @@
   <body
     style="background-color: #262626; color: #d4d4d4; font-family: Helvetica"
   >
-    <h1>This is a pragraph</h1>
     <script>
       // Modifying existing element on page
-      d3.select("h1")
-        .text("Hello World!")
-        .style("text-align", "center")
-        .style("color", "#B98DCA");
-
+      //------------------------------------------------------------------------
       // Appending new element on page
-      d3.select("body")
-        .append("p")
-        .text("Hey, I added this element using d3!!");
 
+      //------------------------------------------------------------------------
       // Creating an SVG
       var canvas = d3 // SVG Constructor
-        .select("body")
+        .select("App-header")
         .append("svg")
         .attr("width", 500) // set html attributes of element
         .attr("height", 500)
@@ -52,9 +45,8 @@
         .attr("y2", 400)
         .attr("stroke", "green")
         .attr("stroke-width", 10);
-
-      // Data Visualization Example
-      // BarChart
+      //------------------------------------------------------------------------
+      // Data Visualization Example - BarChart
       var dataArray = [70, 20, 40, 3, 50, 20, 150];
       var width = 1000;
       var height = 1000;
@@ -68,7 +60,7 @@
         .range(["#004515", "#009e2f"]);
 
       var barChartCanvas = d3 // SVG Constructor
-        .select("body")
+        .select("App-header")
         .append("svg")
         .attr("width", width) // set html attributes of element
         .attr("height", height)
@@ -90,7 +82,7 @@
           return i * 55 + 500;
         })
         .attr("transform", "translate(50, 0)"); // transform(x right, y down)
-
+      //------------------------------------------------------------------------------
       var axis = d3.svg.axis().ticks(10).scale(widthScale);
       barChartCanvas.append("g").call(axis);
     </script>
